@@ -39,7 +39,7 @@
 #define VERSION 0.1
 #endif
 
-#define LIMIT_FILL 1000000000
+#define LIMIT_FILL 100000000
 #define SIZE 10048576
 
 #define NEW_LINE 1
@@ -116,8 +116,8 @@ int main(int argc, char *argv[]) {
 
             case 'f':
                 if(utf8len(optarg) > 1) {
-                    fprintf(stderr, "fwt: argument to -- 'f' should be a one character\n\
-                            Try 'fwt --help' for more information.\n");
+                    fprintf(stderr, "fllt: argument to -- 'f' should be a one character\n\
+                            Try 'fllt --help' for more information.\n");
                     exit(EXIT_FAILURE);
                 }
 
@@ -127,8 +127,8 @@ int main(int argc, char *argv[]) {
             case 'n': 
                for(int i = 0; i < (int)(strlen(optarg));) {
                    if(isdigit(optarg[i]) == 0) {
-                       fprintf(stderr, "fwt: argument to -- 'n' should be a non-negative integer\n\
-                               Try 'fwt --help' for more information.\n");
+                       fprintf(stderr, "fllt: argument to -- 'n' should be a non-negative integer\n\
+                               Try 'fllt --help' for more information.\n");
                        exit(EXIT_FAILURE);
                    }
 
@@ -136,8 +136,8 @@ int main(int argc, char *argv[]) {
                }
 
                 if((number_chr_fill = atoi(optarg)) > LIMIT_FILL) {
-                    fprintf(stderr, "fwt: should then be a non down six digits\n\
-                            Try 'fwt --help' for more information.\n");
+                    fprintf(stderr, "fllt: should then be a non down six digits\n\
+                            Try 'fllt --help' for more information.\n");
                     exit(EXIT_FAILURE);
                 }
                 break;
@@ -169,7 +169,7 @@ int main(int argc, char *argv[]) {
         stream = stdin;
 
     } else if((argc - optind) > 1) {
-        printf("Try 'fwt --help' for more information.\n");
+        printf("Try 'fllt --help' for more information.\n");
         exit(EXIT_FAILURE);
         
     } else if((argc - optind) == 1) {
@@ -269,7 +269,6 @@ int main(int argc, char *argv[]) {
         }
     }
 
-//    printf("variable i : %d\nchar counter : %d\nmax line lingth : %d\nvariable tmp : %d\n", i, chr_counter, max_line_size, tmp);
 
     free(text_buff);
     fclose(stream);
