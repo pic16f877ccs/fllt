@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
     int number_chr_fill = 0, chr = 0, chr_counter = 0 , max_line_size = 0 , option = 0;
     int realloc_size = SIZE , current_chr_counter = 0;
     
-    char str_fill[10] = {" "};    //⇛
+    char str_fill[10] = {" "}; 
     char *start_str = NULL;
     char *end_str = NULL;
     char *text_buff = NULL;
