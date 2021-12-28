@@ -116,8 +116,8 @@ int main(int argc, char *argv[]) {
 
             case 'f':
                 if(utf8len(optarg) > 1) {
-                    fprintf(stderr, "fllt: argument to -- 'f' should be a one character\n\
-                            Try 'fllt --help' for more information.\n");
+                    fprintf(stderr, "fllt: argument to -- 'f' should be a one character\n"\
+                                    "Try 'fllt --help' for more information.\n");
                     exit(EXIT_FAILURE);
                 }
 
@@ -127,8 +127,8 @@ int main(int argc, char *argv[]) {
             case 'n': 
                for(int i = 0; i < (int)(strlen(optarg));) {
                    if(isdigit(optarg[i]) == 0) {
-                       fprintf(stderr, "fllt: argument to -- 'n' should be a non-negative integer\n\
-                               Try 'fllt --help' for more information.\n");
+                       fprintf(stderr, "fllt: argument to -- 'n' should be a non-negative integer\n"\
+                                       "Try 'fllt --help' for more information.\n");
                        exit(EXIT_FAILURE);
                    }
 
@@ -136,8 +136,8 @@ int main(int argc, char *argv[]) {
                }
 
                 if((number_chr_fill = atoi(optarg)) > LIMIT_FILL) {
-                    fprintf(stderr, "fllt: should then be a non down six digits\n\
-                            Try 'fllt --help' for more information.\n");
+                    fprintf(stderr, "fllt: should then be a non down six digits\n"\
+                                    "Try 'fllt --help' for more information.\n");
                     exit(EXIT_FAILURE);
                 }
                 break;
