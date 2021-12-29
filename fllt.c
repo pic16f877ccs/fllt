@@ -1,4 +1,4 @@
-/* Fllt - Fill text with the specified character (standard is a space)
+/* Fllt - fllt text with the specified character (standard is a space)
    up to the maximum line length of the text.
    Copyright (C) 2021 by pic16f877ccs
 
@@ -41,12 +41,10 @@
 
 #define LIMIT_FILL 100000000
 #define SIZE 10048576
-
 #define NEW_LINE 1
+#define BUF_SIZE 10
 
-/* 
-    Options from GNU's coreutils/src/system.h */
-
+/* Options from GNU's coreutils/src/system.h */
 enum {
     GETOPT_HELP_CHAR = (CHAR_MIN - 2),
     GETOPT_VERSION_CHAR = (CHAR_MIN - 3)
@@ -55,30 +53,31 @@ enum {
     "help", no_argument, NULL, GETOPT_HELP_CHAR
 #define GETOPT_VERSION_OPTION_DECL \
     "version", no_argument, NULL, GETOPT_VERSION_CHAR
-#define case_GETOPT_HELP_CHAR                   \
-    case GETOPT_HELP_CHAR:                        \
-        usage(EXIT_SUCCESS);                        \
+#define case_GETOPT_HELP_CHAR \
+    case GETOPT_HELP_CHAR: \
+        usage(EXIT_SUCCESS); \
     break;
-#define case_GETOPT_VERSION_CHAR(Program_name, Version, Authors)        \
-    case GETOPT_VERSION_CHAR:                                             \
-        fprintf(stdout, "%s version %0.3f\nCopyright (c) 2021 by pic16f877ccs\n"   \
+#define case_GETOPT_VERSION_CHAR(Program_name, Version, Authors) \
+    case GETOPT_VERSION_CHAR: \
+        fprintf(stdout, "%s version %0.3f\nCopyright (c) 2021 by pic16f877ccs\n" \
                 "%s is free software and comes with ABSOLUTELY NO WARRANTY.\n" \
-                "Distributed under the CPLv3 License.\n\nWritten by %s\n",      \
-                Program_name, (double) Version, Program_name, Authors);       \
-        exit(EXIT_SUCCESS);                                                   \
+                "Distributed under the CPLv3 License.\n\nWritten by %s\n", \
+                Program_name, (double) Version, Program_name, Authors); \
+        exit(EXIT_SUCCESS); \
     break;
-/* end code from system.h */
 
+/* end code from system.h */
 void usage(int status) {
-    fputs("\nUsage: fllt [OPTION]... [FILE]\n\
-Print each line of text with placeholder character,\n\
-up to the maximum length of a line of text.\n", stdout);
-    fputs("\nOptions:\n\
-  -f,   --fill=CHARACTER      use single CHARACTER to filling (default: \\s)\n\
-  -n,   --number=INTEGER      use positive INTEGER to expand max lines (default: 0)\n\
-  -e,   --end=STRING          use STRING to print end of line\n\
-        --help                display this help and exit\n\
-        --version             output version information and exit\n\n", stdout);
+    fputs("\nUsage: fllt [OPTION]... [FILE]\n"\
+          "Print each line of text with placeholder character,\n"\
+          "up to the maximum length of a line of text.\n", stdout);
+
+    fputs("\nOptions:\n"\
+          "  -f,   --fill=CHARACTER      use single CHARACTER to filling (default: \\s)\n"\
+          "  -n,   --number=INTEGER      use positive INTEGER to expand max lines (default: 0)\n"\
+          "  -e,   --end=STRING          use STRING to print end of line\n"\
+          "        --help                display this help and exit\n"\
+          "        --version             output version information and exit\n\n", stdout);
 
     exit(status);
 }
@@ -89,7 +88,7 @@ int main(int argc, char *argv[]) {
     int number_chr_fill = 0, chr = 0, chr_counter = 0 , max_line_size = 0 , option = 0;
     int realloc_size = SIZE , current_chr_counter = 0;
     
-    char str_fill[10] = {" "}; 
+    char str_fill[BUF_SIZE] = {" "}; 
     char *start_str = NULL;
     char *end_str = NULL;
     char *text_buff = NULL;
@@ -214,8 +213,8 @@ int main(int argc, char *argv[]) {
 
     int i = 0;
     if(current_chr_counter != 0) {
-        /*
-         if there is one line in the text, then print */
+
+        /* if there is one line in the text, then print */
         max_line_size = current_chr_counter;
 
         if(start_flag)
@@ -235,9 +234,8 @@ int main(int argc, char *argv[]) {
 
         putchar('\n');
     } else {
-        /*
-        if there are many lines in the text, then output */
 
+        /* if there are many lines in the text, then output */
         for(; i < chr_counter;) {
             
             /* print the first string of the text line */
